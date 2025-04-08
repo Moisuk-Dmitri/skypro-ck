@@ -1,0 +1,21 @@
+package com.gridnine.testing;
+
+import java.security.InvalidParameterException;
+import java.util.List;
+
+public class FilterByArrivalDateBeforeDepartureDateImpl implements FlightFilter {
+
+    @Override
+    public List<Flight> filter(final List<Flight> flights) {
+        if (flights.isEmpty()) {
+            throw new InvalidParameterException("Empty flight list");
+        }
+
+        return flights.stream()
+                .parallel()
+                .filter(flight -> flight.getSegments().stream()
+                        .anyMatch(segment -> segment.getArrivalDate().isBefore(flight.getSegments().getFirst().getDepartureDate())))
+                .toList();
+    }
+
+}
