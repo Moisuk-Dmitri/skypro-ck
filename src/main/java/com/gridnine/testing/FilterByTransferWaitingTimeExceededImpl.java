@@ -6,6 +6,13 @@ import java.util.List;
 
 public class FilterByTransferWaitingTimeExceededImpl implements FlightFilter {
 
+    /**
+     * Method for filtering by rule: transfer waiting time is above 2 hours
+     *
+     * @param flights List of flights to be filtered
+     *
+     * @return List of flights, satisfying the condition
+     */
     @Override
     public List<Flight> filter(final List<Flight> flights) {
         if (flights.isEmpty()) {

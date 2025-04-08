@@ -6,6 +6,13 @@ import java.util.List;
 
 public class FilterBySubCurrentTimeImpl implements FlightFilter {
 
+    /**
+     * Method for filtering by rule: departure date is before current time
+     *
+     * @param flights List of flights to be filtered
+     *
+     * @return List of flights, satisfying the condition
+     */
     @Override
     public List<Flight> filter(final List<Flight> flights) {
         if (flights.isEmpty()) {

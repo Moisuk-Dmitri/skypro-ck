@@ -5,6 +5,13 @@ import java.util.List;
 
 public class FilterByArrivalDateBeforeDepartureDateImpl implements FlightFilter {
 
+    /**
+     * Method for filtering by rule: arrival date is before departure date
+     *
+     * @param flights List of flights to be filtered
+     *
+     * @return List of flights, satisfying the condition
+     */
     @Override
     public List<Flight> filter(final List<Flight> flights) {
         if (flights.isEmpty()) {
