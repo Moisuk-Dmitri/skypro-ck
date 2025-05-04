@@ -21,7 +21,7 @@ public class FilterByArrivalDateBeforeDepartureDateImpl implements FlightFilter 
         return flights.stream()
                 .parallel()
                 .filter(flight -> flight.getSegments().stream()
-                        .anyMatch(segment -> segment.getArrivalDate().isBefore(flight.getSegments().getFirst().getDepartureDate())))
+                        .noneMatch(segment -> segment.getArrivalDate().isBefore(segment.getDepartureDate())))
                 .toList();
     }
 

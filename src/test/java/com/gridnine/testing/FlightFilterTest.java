@@ -32,7 +32,7 @@ public class FlightFilterTest {
     @Test
     @DisplayName("filter by sub current time test - positive")
     void shouldFilterBySubCurrentTime() {
-        Assertions.assertEquals(new FilterBySubCurrentTimeImpl().filter(flightList), List.of(flightList.get(0), flightList.get(1)));
+        Assertions.assertEquals(new FilterBySubCurrentTimeImpl().filter(flightList), List.of(flightList.get(2)));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class FlightFilterTest {
     @Test
     @DisplayName("filter by arrival before departure test - positive")
     void shouldFilterByArrivalDateBeforeDepartureDate() {
-        Assertions.assertEquals(new FilterByArrivalDateBeforeDepartureDateImpl().filter(flightList), List.of(flightList.get(1), flightList.get(2)));
+        Assertions.assertEquals(new FilterByArrivalDateBeforeDepartureDateImpl().filter(flightList), List.of(flightList.get(0)));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class FlightFilterTest {
     @Test
     @DisplayName("filter by transfer waiting time exceeded 2 hours test - positive")
     void shouldFilterByTransferWaitingTimeExceeded() {
-        Assertions.assertEquals(new FilterByTransferWaitingTimeExceededImpl().filter(flightList), List.of(flightList.get(0)));
+        Assertions.assertEquals(new FilterByTransferWaitingTimeExceededImpl().filter(flightList), List.of(flightList.get(1), flightList.get(2)));
     }
 
     @Test

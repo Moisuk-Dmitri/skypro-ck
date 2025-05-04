@@ -21,7 +21,8 @@ public class FilterBySubCurrentTimeImpl implements FlightFilter {
 
         return flights.stream()
                 .parallel()
-                .filter(flight -> LocalDateTime.now().isAfter(flight.getSegments().getFirst().getDepartureDate()))
+                .filter(flight -> flight.getSegments().stream()
+                        .noneMatch(segment -> LocalDateTime.now().isAfter(segment.getDepartureDate())))
                 .toList();
     }
 

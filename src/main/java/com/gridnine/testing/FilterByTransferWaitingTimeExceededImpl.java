@@ -1,6 +1,9 @@
 package com.gridnine.testing;
 
 import java.security.InvalidParameterException;
+import java.sql.Time;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,19 +24,14 @@ public class FilterByTransferWaitingTimeExceededImpl implements FlightFilter {
 
         List<Flight> result = new ArrayList<>();
         for (Flight flight : flights) {
-            int transferWaitingTimeMin = 0;
+            long transferWaitingTime = 0;
             for (int currSegment = 0; currSegment < flight.getSegments().size() - 1; currSegment++) {
+                transferWaitingTime += ChronoUnit.HOURS.between(flight.getSegments().get(currSegment).getArrivalDate(),
+                        flight.getSegments().get(currSegment + 1).getDepartureDate());
+            }
 
-                int departureTimeMin = flight.getSegments().get(currSegment + 1).getDepartureDate().getHour() * 60 +
-                        flight.getSegments().get(currSegment + 1).getDepartureDate().getMinute();
-                int arrivalTimeMin = flight.getSegments().get(currSegment).getArrivalDate().getHour() * 60 +
-                        flight.getSegments().get(currSegment).getArrivalDate().getMinute();
-                transferWaitingTimeMin += Math.abs(departureTimeMin - arrivalTimeMin);
-
-                if (transferWaitingTimeMin > 120) {
-                    result.add(flight);
-                    break;
-                }
+            if (transferWaitingTime <= 2) {
+                result.add(flight);
             }
         }
 
